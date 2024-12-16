@@ -4,25 +4,8 @@ import './AdminPage.css'; // You can add custom styles here
 import { useNavigate } from 'react-router-dom';
 
 const AdminPage = () => {
-  // Sample data for Line Chart
-  const lineData = [
-    { name: 'Jan', units: 400, revenue: 2400 },
-    { name: 'Feb', units: 300, revenue: 2210 },
-    { name: 'Mar', units: 200, revenue: 2290 },
-    { name: 'Apr', units: 278, revenue: 2000 },
-    { name: 'May', units: 189, revenue: 2181 },
-    { name: 'Jun', units: 239, revenue: 2500 },
-    { name: 'Jul', units: 349, revenue: 2100 },
-  ];
-
-  // Sample data for Pie Chart
-  const pieData = [
-    { name: 'Group A', value: 400 },
-    { name: 'Group B', value: 300 },
-    { name: 'Group C', value: 300 },
-    { name: 'Group D', value: 200 },
-  ];
-
+  const [lineData, setLineData] = useState([]);
+  const [pieData, setPieData] = useState([]);
   const [analysis, setAnalysis] = useState({
     averageConsumption: 0,
     totalRevenue: 0,
@@ -64,8 +47,23 @@ const AdminPage = () => {
   };
 
   useEffect(() => {
-    // Perform analysis on the line data when the component mounts
-    performAnalysis(lineData);
+    // Fetch data from the server
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/consumption-data');
+        const data = await response.json();
+
+        setLineData(data);
+        setPieData(data.map((entry) => ({ name: entry.name, value: entry.units })));
+
+        // Perform analysis on the fetched data
+        performAnalysis(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (
@@ -81,15 +79,15 @@ const AdminPage = () => {
 
       <div className="metrics-container">
         <div className="metric-card" onClick={handleRedirect}>
-          <p class="a">30000</p>
+          <p className="a">30,000</p>
           <p>Total No. of Users</p>
         </div>
         <div className="metric-card" onClick={handleRedirect}>
-          <p class="a">152675</p>
+          <p className="a">1,52,675</p>
           <p>Total Units Consumed</p>
         </div>
         <div className="metric-card" onClick={handleRedirect}>
-          <p class="a">150000</p>
+          <p className="a">15,52,000</p>
           <p>Total Revenue</p>
         </div>
       </div>

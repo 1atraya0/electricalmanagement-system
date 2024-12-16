@@ -1,0 +1,42 @@
+/* src/components/AddClient.css */
+.add-client {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .add-client h2 {
+    text-align: center;
+  }
+  
+  .add-client form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .add-client form div {
+    margin-bottom: 15px;
+  }
+  
+  .add-client form label {
+    margin-bottom: 5px;
+  }
+  
+  .add-client form input {
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  .add-client form button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .add-client form button:hover {
+    background-color: #45a049;
+  }
+  

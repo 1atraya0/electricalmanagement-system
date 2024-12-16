@@ -1,10 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
-import ClientPage from './components/ClientPage';
-import AdminPage from './components/AdminPage';
-import UsersPage from './components/UserPage';// Import the UsersPage
-import LoginPage from './components/LoginPage';
+import ClientPage from './pages/ClientPage';
+import AdminPage from './pages/AdminPage';
+import UsersPage from './pages/UserPage';// Import the UsersPage
+import LoginPage from './pages/LoginPage';
 
 function App() {
   const userRole = localStorage.getItem('userRole');

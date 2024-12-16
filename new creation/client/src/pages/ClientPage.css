@@ -1,0 +1,58 @@
+/* src/components/ClientPage.css */
+
+.client-page {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  
+  .user-info-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .header-buttons {
+    display: flex;
+    align-items: center;
+  }
+  
+  .username {
+    font-size: 20px;
+  }
+  
+  .header-buttons button {
+    border-radius: 10px;
+    width:fit-content ;
+    font-size: large;
+    margin-left: 10px;
+  }
+  
+  .content-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .info-section, .analysis-section {
+    margin: 20px 0;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .graphs-section {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .consumption-graph, .pie-graph {
+    flex: 1;
+    margin: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .analysis-section {
+    margin-top: 20px;
+  }
+  

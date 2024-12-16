@@ -1,22 +1,22 @@
 // server/server.js
 const express = require('express');
-const connectDB = require('./db');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const consumptionDataRoutes = require('./routes/consumptionDataRoutes');
+
 const app = express();
-const cors = require('cors');
-
-require('dotenv').config();
-
-connectDB();
-
-app.use(cors());
-app.use(express.json());
-
-// Define routes
-app.use('/api/client', require('./routes/client'));
-app.use('/api/admin', require('./routes/admin'));
-
 const PORT = process.env.PORT || 5000;
 
+mongoose.connect('mongodb://localhost:27017/your_database_name', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+});
+
+app.use(bodyParser.json());
+
+app.use('/api/consumption-data', consumptionDataRoutes);
+
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
