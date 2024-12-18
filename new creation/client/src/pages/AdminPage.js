@@ -62,6 +62,10 @@ const AdminPage = () => {
       consumptionTrend: trend,
     });
   };
+  const handleLogout = () => {
+    localStorage.removeItem('userRole'); // Remove user role from local storage
+    navigate('/login'); // Navigate to the login page
+  };
 
   useEffect(() => {
     // Perform analysis on the line data when the component mounts
@@ -75,7 +79,7 @@ const AdminPage = () => {
           <h2>Admin Dashboard</h2>
         </div>
         <div className="logout-button">
-          <button>Logout</button>
+          <button  onClick={handleLogout}>Logout</button>
         </div>
       </header>
 
