@@ -1,0 +1,22 @@
+/* src/components/GenerateBill.css */
+.bill-container {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 300px;
+    margin: 0 auto;
+    background-color: #fff;
+  }
+  
+  .bill-info, .bill-details {
+    margin-bottom: 20px;
+  }
+  
+  h2, h3 {
+    text-align: center;
+  }
+  
+  p {
+    margin: 5px 0;
+  }
+  

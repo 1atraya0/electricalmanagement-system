@@ -4,8 +4,25 @@ import './AdminPage.css'; // You can add custom styles here
 import { useNavigate } from 'react-router-dom';
 
 const AdminPage = () => {
-  const [lineData, setLineData] = useState([]);
-  const [pieData, setPieData] = useState([]);
+  // Sample data for Line Chart
+  const lineData = [
+    { name: 'Jan', units: 400, revenue: 2400 },
+    { name: 'Feb', units: 300, revenue: 2210 },
+    { name: 'Mar', units: 200, revenue: 2290 },
+    { name: 'Apr', units: 278, revenue: 2000 },
+    { name: 'May', units: 189, revenue: 2181 },
+    { name: 'Jun', units: 239, revenue: 2500 },
+    { name: 'Jul', units: 349, revenue: 2100 },
+  ];
+
+  // Sample data for Pie Chart
+  const pieData = [
+    { name: 'Group A', value: 400 },
+    { name: 'Group B', value: 300 },
+    { name: 'Group C', value: 300 },
+    { name: 'Group D', value: 200 },
+  ];
+
   const [analysis, setAnalysis] = useState({
     averageConsumption: 0,
     totalRevenue: 0,
@@ -47,23 +64,8 @@ const AdminPage = () => {
   };
 
   useEffect(() => {
-    // Fetch data from the server
-    const fetchData = async () => {
-      try {
-        const response = await fetch('/api/consumption-data');
-        const data = await response.json();
-
-        setLineData(data);
-        setPieData(data.map((entry) => ({ name: entry.name, value: entry.units })));
-
-        // Perform analysis on the fetched data
-        performAnalysis(data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
+    // Perform analysis on the line data when the component mounts
+    performAnalysis(lineData);
   }, []);
 
   return (

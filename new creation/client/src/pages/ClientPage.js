@@ -1,9 +1,16 @@
-// src/components/ClientPage.js
-import React from 'react';
+import React, { useState } from 'react';
+import Modal from 'react-modal';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
 import { LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import GenerateBill from './GenerateBill';
 import './ClientPage.css'; // Add custom styles here
 
+Modal.setAppElement('#root'); // Set the root element for accessibility
+
 const ClientPage = () => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const navigate = useNavigate(); // Initialize the navigate function
+
   // Sample data for Line Chart
   const lineData = [
     { name: 'Jan', units: 400, revenue: 2400 },
@@ -23,21 +30,55 @@ const ClientPage = () => {
     { name: 'Group D', value: 200 },
   ];
 
+  // Hardcoded user information
+  const userInfo = {
+    name: 'John Doe',
+    email: 'john.doe@example.com',
+    phone: '+1234567890',
+    address: '1234 Main St, Anytown, USA',
+    membership: 'Premium',
+  };
+
+  // Hardcoded bill data
+  const billData = {
+    unitsConsumed: 300,
+    totalAmount: 150,
+    date: new Date().toLocaleDateString(),
+  };
+
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
+  // Handle logout and navigate to login page
+  const handleLogout = () => {
+    localStorage.removeItem('userRole'); // Remove user role from local storage
+    navigate('/login'); // Navigate to the login page
+  };
+
   return (
     <div className="client-page">
       <header>
         <div className="user-info-header">
-          <div className="username">Username</div>
+          <div className="username">{userInfo.name}</div>
           <div className="header-buttons">
-            <button>Generate Bill</button>
-            <button>Logout</button>
+            <button onClick={openModal}>Generate Bill</button>
+            <button onClick={handleLogout}>Logout</button> {/* Add onClick handler for logout */}
           </div>
         </div>
       </header>
       <div className="content-container">
         <div className="info-section">
-          <h3>User Info</h3>
-          {/* Add user info content here */}
+          <h3>User Info : </h3>
+          <p><strong>Name:</strong> {userInfo.name}</p>
+          <p><strong>Email:</strong> {userInfo.email}</p>
+          <p><strong>Phone:</strong> {userInfo.phone}</p>
+          <p><strong>Address:</strong> {userInfo.address}</p>
+          <p><strong>Membership:</strong> {userInfo.membership}</p>
         </div>
         <div className="graphs-section">
           <div className="consumption-graph">
@@ -72,6 +113,17 @@ const ClientPage = () => {
           {/* Add AI analysis content here */}
         </div>
       </div>
+
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Generate Bill"
+        className="Modal"
+        overlayClassName="Overlay"
+      >
+        <GenerateBill userInfo={userInfo} billData={billData} />
+        <button onClick={closeModal}>Close</button>
+      </Modal>
     </div>
   );
 };
