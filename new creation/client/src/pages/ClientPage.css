@@ -12,7 +12,11 @@
   padding: 20px;
   box-shadow: 0 5px 10px rgba(0,0,0,0.3);
 }
-
+.Modal button{
+  width: 40%;
+  margin-left: 20px;
+  margin-top: 20px;
+}
 .Overlay {
   position: fixed;
   top: 0;

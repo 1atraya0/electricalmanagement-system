@@ -123,6 +123,7 @@ const ClientPage = () => {
       >
         <GenerateBill userInfo={userInfo} billData={billData} />
         <button onClick={closeModal}>Close</button>
+        <button >Pay Bill</button>
       </Modal>
     </div>
   );
